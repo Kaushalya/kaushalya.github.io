@@ -19,8 +19,7 @@ layout: page
 <p><a href="https://scholar.google.com/citations?user=5ZSfU5wAAAAJ&hl=en">Google Scholar</a></p>
 <ul class="paper-list">
 	<li><b>Kaushalya Madhawa</b> and Tsuyoshi Murata, <a href="https://arxiv.org/abs/1804.07059"> "Exploring Partially Observed Networks with Non-parametric Bandits"</a>, Arxiv preprint, 2018 </li>
-	<li><b>P.K.K.Madhawa</b> and A.S. Athukorale, A Robust Algorithm for Determining the Newsworthi-
-ness of Microblogs", International Conference on Advances in ICT for Emerging Regions (ICTer),
+	<li><b>P.K.K.Madhawa</b> and A.S. Athukorale, A Robust Algorithm for Determining the Newsworthiness of Microblogs", International Conference on Advances in ICT for Emerging Regions (ICTer),
 Colombo, Sri Lanka, 2015</li>
 </ul>
 
