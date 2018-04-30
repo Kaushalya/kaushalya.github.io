@@ -19,7 +19,7 @@ Here is a list some of the papers I had read as literature review for the ["CRES
 
 **Do Deep Convolutional Nets Really Need to be Deep and Convolutional?** Gregor Urban et al. ICLR 2017
 {: .notice}
-> This can be considered as a response to the NIPS 2014 paper "Do deep nets really need to be deep?" (Ba and Caruana, 2014). They train shallowe Colnvolutional Neural Networks using network distillation on an ensemble of state-of-the-art CNNs on CIFAR-10 dataset. Their results suggest that to achieve similar accuracy with a shallow student model, it should possess much more parameters than the deep teacher model (can be 30 times larger than the deep teacher model). Still the accuracy may not reach the level of the teacher model.
+> This can be considered as a response to the NIPS 2014 paper "Do deep nets really need to be deep?" (Ba and Caruana, 2014). They train shallow Colnvolutional Neural Networks using network distillation on an ensemble of state-of-the-art CNNs on CIFAR-10 dataset. Their results suggest that to achieve similar accuracy with a shallow student model, it should possess much more parameters than the deep teacher model (can be 30 times larger than the deep teacher model). Still the accuracy may not reach the level of the teacher model.
 
 **MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications**. Howard et al. (Google Inc.) Arxiv preprint [27th April 2017]
 {: .notice}
