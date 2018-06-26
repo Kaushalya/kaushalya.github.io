@@ -23,7 +23,7 @@ Obviously, this is a *gibbon*.
 
 If this didn't make you scratch your head wondering "what kind of skullduggery is this?", then either you know what is coming up in the next section or you are a bot relying on computer vision.
 
-While the whole world is worrying about [a distant future run by AI bots](https://futurism.com/father-artificial-intelligence-singularity-decades-away/), this example illustrates a critical limitation current AI systems possess.
+While the mainstream media are worrying about [a distant future run by psychopath bots](http://money.cnn.com/2018/06/07/technology/mit-media-lab-normal-ai/index.html), this example illustrates a critical limitation current AI systems possess.
 Nowadays, we hear the terms AI or deep learning thrown into everything from facial recognition to autonomous driving. However, the existence of adversarial examples reminds us how vulnerable such critical systems can become. An adversarial example is an input which has been tampered in a way such that a DNN classifies it incorrectly.
 
 Here we show how the above example is created by adding an adversarial pertubation to an image of panda. Despite no difference is visible to human eye, the DNN confidently classifies the updated image as a 'gibbon'.
