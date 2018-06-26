@@ -36,7 +36,7 @@ The excellent [blog post by researchers at OpenAI](https://blog.openai.com/adver
 ### Generation of adversarial examples
 Although there are several ways to create adversarial examples, [Fast gradient sign method (FGSM)](https://arxiv.org/abs/1412.6572) and its iterative version (BIM) are the commonly used methods. The FGSM attack creates an adversarial example by adding a small perturbation \\( \epsilon \\) to an example \\( X \\),
 $$( X^{adv} = X + \epsilon \cdot sign(\nabla_X J (X, y_{true})).$$
-The perturbation has \\( L_{\infty} \\) norm equivalent to \\(  \epsilon \\) and its direction is computed by the sign of the gradient so adding this pertubation to \\( X \\) increases the loss \\( J \\).
+The perturbation has \\( l_{\infty} \\)-norm equivalent to \\(  \epsilon \\) and its direction is computed by the sign of the gradient so adding this pertubation to \\( X \\) increases the loss \\( J \\).
 
 [Clevehans](https://github.com/tensorflow/cleverhans), the adversarial example library developed by Ian Goodfellow and Nicholas Papernot includes implementation of most of the adversarial attacks and defenses including the paper we are discussing next.
 
