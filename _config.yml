@@ -17,7 +17,7 @@ resume-external: false
 resume-url: assets/KaushalyaCV_Feb2018.pdf
 
 url: https://kaushalya.github.io
-markdown: redcarpet
+#markdown: redcarpet
 # your url: http://USERNAME.github.io
 
 permalink: /:title/
