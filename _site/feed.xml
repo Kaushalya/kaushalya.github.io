@@ -1,4 +1,327 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-30T16:19:04+09:00</updated><id>http://localhost:4000/</id><title type="html">kaushalya.github.io</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">Reading list - Compression of Deep Neural Networks</title><link href="http://localhost:4000/reading-list-Deep-compression/" rel="alternate" type="text/html" title="Reading list - Compression of Deep Neural Networks" /><published>2018-04-13T00:00:00+09:00</published><updated>2018-04-13T00:00:00+09:00</updated><id>http://localhost:4000/reading-list-Deep-compression</id><content type="html" xml:base="http://localhost:4000/reading-list-Deep-compression/">&lt;p&gt;Here is a list some of the papers I had read as literature review for the &lt;a href=&quot;https://www.jst.go.jp/kisoken/crest/en/project/1111094/1111094_07.html&quot;&gt;“CREST Deep”&lt;/a&gt; project. This project is funded by Japan Science and Technology Agency (JST). Our goal is to make the DNN models smaller, so they take less disk space, but without having a significant impact on the accuracy.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-26T12:39:25+09:00</updated><id>http://localhost:4000/</id><title type="html">kaushalya.github.io</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">Towards Deep Learning Models Resistant to Adversarial Attacks - A review</title><link href="http://localhost:4000/DL-models-resitant-to-adversarial-attacks/" rel="alternate" type="text/html" title="Towards Deep Learning Models Resistant to Adversarial Attacks - A review" /><published>2018-05-19T00:00:00+09:00</published><updated>2018-05-19T00:00:00+09:00</updated><id>http://localhost:4000/DL-models-resitant-to-adversarial-attacks</id><content type="html" xml:base="http://localhost:4000/DL-models-resitant-to-adversarial-attacks/">&lt;h2 id=&quot;adversarial-examples&quot;&gt;Adversarial examples&lt;/h2&gt;
+
+&lt;p&gt;Let’s start with a simple quiz to see how your vision fares against a neural network.&lt;/p&gt;
+
+&lt;p&gt;What is this?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/adversarial/gibbon.png&quot; alt=&quot;guess&quot; title=&quot;Gibbon&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Obviously, this is a &lt;em&gt;gibbon&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;If this didn’t make you scratch your head wondering “what kind of skullduggery is this?”, then either you know what is coming up in the next section or you are a bot relying on computer vision.&lt;/p&gt;
+
+&lt;p&gt;While the whole world is worrying about &lt;a href=&quot;https://futurism.com/father-artificial-intelligence-singularity-decades-away/&quot;&gt;a distant future run by AI bots&lt;/a&gt;, this example illustrates a critical limitation current AI systems possess.
+Nowadays, we hear the terms AI or deep learning thrown into everything from facial recognition to autonomous driving. However, the existence of adversarial examples reminds us how vulnerable such critical systems can become. An adversarial example is an input which has been tampered in a way such that a DNN classifies it incorrectly.&lt;/p&gt;
+
+&lt;p&gt;Here we show how the above example is created by adding an adversarial pertubation to an image of panda. Despite no difference is visible to human eye, the DNN confidently classifies the updated image as a ‘gibbon’.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/adversarial/panda.png&quot; alt=&quot;adversarial example&quot; title=&quot;Adversarial example&quot; /&gt;
+An adversarial example. (Image source: &lt;a href=&quot;https://arxiv.org/abs/1412.6572&quot;&gt;Goodfellow et al.&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;The excellent &lt;a href=&quot;https://blog.openai.com/adversarial-example-research/&quot;&gt;blog post by researchers at OpenAI&lt;/a&gt; provides a glimpse of real world AI safety issues which can be caused by adversarial attacks.&lt;/p&gt;
+
+&lt;h3 id=&quot;generation-of-adversarial-examples&quot;&gt;Generation of adversarial examples&lt;/h3&gt;
+&lt;p&gt;Although there are several ways to create adversarial examples, &lt;a href=&quot;https://arxiv.org/abs/1412.6572&quot;&gt;Fast gradient sign method (FGSM)&lt;/a&gt; and its iterative version (BIM) are the commonly used methods. The FGSM attack creates an adversarial example by adding a small perturbation \( \epsilon \) to an example \( X \),
+&lt;script type=&quot;math/tex&quot;&gt;( X^{adv} = X + \epsilon \cdot sign(\nabla_X J (X, y_{true})).&lt;/script&gt;
+The perturbation has \( L_{\infty} \) norm equivalent to \(  \epsilon \) and its direction is computed by the sign of the gradient so adding this pertubation to \( X \) increases the loss \( J \).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tensorflow/cleverhans&quot;&gt;Clevehans&lt;/a&gt;, the adversarial example library developed by Ian Goodfellow and Nicholas Papernot includes implementation of most of the adversarial attacks and defenses including the paper we are discussing next.&lt;/p&gt;
+
+&lt;h2 id=&quot;defenses-against-adversarial-examples&quot;&gt;Defenses against adversarial examples&lt;/h2&gt;
+&lt;p&gt;Regularization such as dropout or weight decay makes models robust against overfitting. But they are not effective against the newly discovered phenomenon of adversarial examples.&lt;/p&gt;
+
+&lt;p&gt;The two main adversarial defenses are&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Adversarial training: In addition to the real examples, the model is trained with adversarial examples (eg: generated by FGSM). The paper by &lt;a href=&quot;https://arxiv.org/abs/1611.01236&quot;&gt;Kurakin et al.,&lt;/a&gt; discusses how CNNs can be adversarially trained with ImageNet dataset.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1511.04508&quot;&gt;Defensive distillation&lt;/a&gt;: An identical model is trained with output probabilities predicted by another model which was trained on the same dataset. Originally, &lt;a href=&quot;https://arxiv.org/abs/1503.02531&quot;&gt;model distillation&lt;/a&gt; is proposed as a technique to compress trained models.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;However, these techniques are shown to be vulnerable to more advanced attacks (eg: Basic iterative method (BIM)). Adversarial training using adversarial examples generated by such attacks hasn’t proved to be effective either.&lt;/p&gt;
+
+&lt;p&gt;The paper, &lt;a href=&quot;https://arxiv.org/abs/1706.06083&quot;&gt;Towards Deep Learning Models Resistant to Adversarial Attacks&lt;/a&gt;
+reformulates the itertive FGSM attack as a projected gradient descent (PGD) on the negative loss function and shows models trained against this PGD adversary is robust to all first order attacks (uses only the gradient information).&lt;/p&gt;
+
+&lt;h3 id=&quot;pgd-training&quot;&gt;PGD training&lt;/h3&gt;
+&lt;p&gt;This approach leverages the min-max formulation proposed by &lt;a href=&quot;https://arxiv.org/pdf/1511.06385.pdf&quot;&gt;Lyu et al., 2015&lt;/a&gt; to incorporate adversarial perturbations into the loss function.&lt;/p&gt;
+
+&lt;p&gt;A standard classification problem can be expressed as finding parameters \( \theta \) which minimizes a loss  function \( L(x, y, \theta) \) (for example, cross-entropy) for a set of examples \( x \) with corresponding labels \( y \). If we assume that the examples are sampled from a distribution \( \mathcal{D} \), the optimization problem reduces to finding parameter $\theta$ which minimizes the risk \( \mathbb{E}_{x,y \sim \mathcal{D}}[L(x, y, \theta)] \). If we want our classifier to stay robust to an adversary which perturbs an example \( x \) by \( \delta \), the loss function is updated to include this perturbation.
+&lt;script type=&quot;math/tex&quot;&gt;\min_{\theta}\bigg[\mathbb{E}_{x,y \sim \mathcal{D}}[\underbrace{\max_{\delta \in \mathcal{S}}L(x + \delta, y, \theta)]}_\text{inner maximization}\bigg].&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;The min-max formulation, as evident from its name, consists of a minimization problem and a maximization problem. The &lt;em&gt;inner maximization problem&lt;/em&gt; is tasked with adding a perturbation to the input x which achieves a higher loss. On the other hand, the goal of the &lt;em&gt;outer minimization problem&lt;/em&gt; is to learn model parameters \( \theta \) minimizing the loss which is being maximized by the inner maximization.&lt;/p&gt;
+
+&lt;p&gt;According to this definition, if the adversarial loss of a model is small for all adversarial examples \( x+\delta \), the model should be robust for all allowed adversarial attacks.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-to-solve-this-min-max-optimization-problem&quot;&gt;How to solve this min-max optimization problem?&lt;/h3&gt;
+
+&lt;p&gt;This optimization problem is non-convex. Thus, gradient based optimization can not be directly applied. Previous work had to depend on linear approximations of the maximization formulation. For example, Lyu et al., obtained a closed form solution for &lt;em&gt;worst-case&lt;/em&gt; \( \delta \) by first approximating the inner maximization problem with Taylor series and then applying Lagrangian multiplier method. This simplifies the optimization problem to minimizing \( L(x+\delta) \), which can be written as a regularization term with Taylor series. For \( l_{\infty} \)-bounded attacks (commonly used type of attacks) this simplified formulation becomes identical to the &lt;a href=&quot;https://arxiv.org/abs/1412.6572&quot;&gt;fast gradient sign (FGSM) attack&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This paper claims that calculating gradient at the maximizer of the inner maximization problem provides a valid descent direction for the saddle point problem. Instead of explicitly maximizing the adversarial loss in the inner step, existing adversarial attack algorithms are employed for maximizing the loss. Particularly, for Experiments the authors use a multi-step variant of the FGSM attack, essentially, prjected gradient descent on the negative loss function. Now the saddle point problem reduces to minimization of the loss, where the loss is calculated for the adversarial examples generated by this adversary. Their attack iteratively applies FGSM attack and afterwards the adversarial example \( (x+\delta) \) is projected to \( (x-\delta, x+\delta) \) range, hence it is named the projected gradient attack (PGD).&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;http://drona.csa.iisc.ernet.in/~e0270/Jan-2015/Tutorials/lecture-notes-3.pdf&quot;&gt;lecture note by Harikrishna Narasimhan&lt;/a&gt; is a good introduction to projected gradient descent. (The first two lecture notes in &lt;a href=&quot;http://drona.csa.iisc.ernet.in/~e0270/Jan-2015/Tutorials/&quot;&gt;this series&lt;/a&gt; sets the background for PGD)&lt;/p&gt;
+
+&lt;p&gt;The running time of adversarial training with k-step PGD attack is (k+1) times the training time without adversarial attack. Due to this reason their experiments are limited only to MNIST and CIFAR-10 datasets.&lt;/p&gt;</content><author><name>Kaushalya</name></author><category term="blog" /><summary type="html">A review of ICLR 2018 paper &quot;Towards Deep Learning Models Resistant to Adversarial Attacks&quot;</summary></entry><entry><title type="html">Dl Models Resitant To Adversarial Attacks</title><link href="http://localhost:4000/DL-models-resitant-to-adversarial-attacks/" rel="alternate" type="text/html" title="Dl Models Resitant To Adversarial Attacks" /><published>2018-05-19T00:00:00+09:00</published><updated>2018-05-19T00:00:00+09:00</updated><id>http://localhost:4000/DL-models-resitant-to-adversarial-attacks</id><content type="html" xml:base="http://localhost:4000/DL-models-resitant-to-adversarial-attacks/">&lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;title&gt;Deep Learning Models Resistant to Adversarial Attacks&lt;/title&gt;
+      &lt;meta charset=&quot;utf-8&quot;&gt;
+      &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+      
+      &lt;link rel=&quot;stylesheet&quot; href=&quot;file:////Users/kaumad/.atom/packages/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css&quot;&gt;
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      &lt;style&gt; 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*=&quot;language-&quot;],
+pre[class*=&quot;language-&quot;] {
+  color: #333;
+  background: none;
+  font-family: Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*=&quot;language-&quot;] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) &gt; code[class*=&quot;language-&quot;] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:&quot;Helvetica Neue&quot;,Helvetica,&quot;Segoe UI&quot;,Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body&gt;:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body&gt;p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body&gt;ul,html body&gt;ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li&gt;p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote&gt;:first-child{margin-top:0}html body blockquote&gt;:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:&quot;\00a0&quot;}html body pre&gt;code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers&gt;code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows&gt;span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows&gt;span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for=&quot;preview&quot;]) .code-chunk .btn-group{display:none}.markdown-preview:not([for=&quot;preview&quot;]) .code-chunk .status{display:none}.markdown-preview:not([for=&quot;preview&quot;]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body for=&quot;html-export&quot;&gt;
+      &lt;div class=&quot;mume markdown-preview   &quot;&gt;
+      &lt;h1 class=&quot;mume-header&quot; id=&quot;towards-deep-learning-models-resistant-to-adversarial-attacks-a-review&quot;&gt;&amp;quot;Towards Deep Learning Models Resistant to Adversarial Attacks&amp;quot; - A review&lt;/h1&gt;
+
+&lt;h2 class=&quot;mume-header&quot; id=&quot;adversarial-examples&quot;&gt;Adversarial examples&lt;/h2&gt;
+
+&lt;p&gt;Nowadays, deep neural networks (DNN) play a central role in lot of security-critical systems such as facial recognition and autonomous driving. However, recent research has shown that such DNN models can be fooled by adversarial examples. An adversarial example is an input which has been tampered in a way such that a DNN classifies it incorrectly.&lt;/p&gt;
+&lt;p&gt;This popular example shows how a DNN (in this case, GoogLeNet) can be misled by adding an adversarial perturbation. Despite no difference is visible to human eye, the DNN confidently classifies the updated image as a 'gibbon'.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/images/adversarial/panda.png&quot; alt=&quot;adversarial example&quot; title=&quot;Adversarial example&quot;&gt;&lt;br&gt;
+An adversarial example. (Image source: &lt;a href=&quot;https://arxiv.org/abs/1412.6572&quot;&gt;Goodfeellow et al.&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;The excellent &lt;a href=&quot;https://blog.openai.com/adversarial-example-research/&quot;&gt;blog post by researchers at OpenAI&lt;/a&gt; provides a glimpse of real world AI safety issues which can be caused by adversarial attacks.&lt;/p&gt;
+&lt;h3 class=&quot;mume-header&quot; id=&quot;generation-of-adversarial-examples&quot;&gt;Generation of adversarial examples&lt;/h3&gt;
+
+&lt;h2 class=&quot;mume-header&quot; id=&quot;defenses-against-adversarial-examples&quot;&gt;Defenses against adversarial examples&lt;/h2&gt;
+
+&lt;h3 class=&quot;mume-header&quot; id=&quot;adversarial-training&quot;&gt;Adversarial training&lt;/h3&gt;
+
+&lt;h3 class=&quot;mume-header&quot; id=&quot;pgd&quot;&gt;PGD&lt;/h3&gt;
+
+&lt;p&gt;This approach leverages the min-max formulation proposed by &lt;a href=&quot;https://arxiv.org/pdf/1511.06385.pdf&quot;&gt;Lyu et al., 2015&lt;/a&gt; to incorporate adversarial perturbations into the loss function.&lt;/p&gt;
+&lt;p&gt;A standard classification problem can be expressed as finding parameters &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;θ&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;\theta&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.69444em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.02778em;&quot;&gt;θ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; which minimizes a loss  function &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo separator=&quot;true&quot;&gt;,&lt;/mo&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo separator=&quot;true&quot;&gt;,&lt;/mo&gt;&lt;mi&gt;θ&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;L(x, y, \theta)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.75em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:1em;vertical-align:-0.25em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;mopen&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mord mathit&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;mpunct&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.16666666666666666em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.03588em;&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;mpunct&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.16666666666666666em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.02778em;&quot;&gt;θ&lt;/span&gt;&lt;span class=&quot;mclose&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; (for example, cross-entropy) for a set of examples &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;x&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.43056em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.43056em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot;&gt;x&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; with corresponding labels &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;y&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.43056em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.625em;vertical-align:-0.19444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.03588em;&quot;&gt;y&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;. If we assume that the examples are sampled from a distribution &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mrow&gt;&lt;mi mathvariant=&quot;script&quot;&gt;D&lt;/mi&gt;&lt;/mrow&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;\mathcal{D}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.68333em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.68333em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mord mathcal&quot; style=&quot;margin-right:0.02778em;&quot;&gt;D&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;, the optimization problem reduces to finding parameter &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;θ&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;\theta&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.69444em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.02778em;&quot;&gt;θ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; which minimizes the risk &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi mathvariant=&quot;double-struck&quot;&gt;E&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo separator=&quot;true&quot;&gt;,&lt;/mo&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo&gt;∼&lt;/mo&gt;&lt;mrow&gt;&lt;mi mathvariant=&quot;script&quot;&gt;D&lt;/mi&gt;&lt;/mrow&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;[&lt;/mo&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo separator=&quot;true&quot;&gt;,&lt;/mo&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo separator=&quot;true&quot;&gt;,&lt;/mo&gt;&lt;mi&gt;θ&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;]&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;\mathbb{E}_{x,y \sim \mathcal{D}}[L(x, y, \theta)]&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.75em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:1.036108em;vertical-align:-0.286108em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mord mathbb&quot;&gt;E&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;msupsub&quot;&gt;&lt;span class=&quot;vlist-t vlist-t2&quot;&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.328331em;&quot;&gt;&lt;span style=&quot;top:-2.5500000000000003em;margin-right:0.05em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:2.7em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;sizing reset-size6 size3 mtight&quot;&gt;&lt;span class=&quot;mord mtight&quot;&gt;&lt;span class=&quot;mord mathit mtight&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;mpunct mtight&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mord mathit mtight&quot; style=&quot;margin-right:0.03588em;&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;mrel mtight&quot;&gt;∼&lt;/span&gt;&lt;span class=&quot;mord mtight&quot;&gt;&lt;span class=&quot;mord mathcal mtight&quot; style=&quot;margin-right:0.02778em;&quot;&gt;D&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-s&quot;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.286108em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;mopen&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mord mathit&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;mopen&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mord mathit&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;mpunct&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.16666666666666666em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.03588em;&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;mpunct&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.16666666666666666em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.02778em;&quot;&gt;θ&lt;/span&gt;&lt;span class=&quot;mclose&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;mclose&quot;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;. If we want our classifier to stay robust to an adversary which perturbs an example &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;x&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.43056em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.43056em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot;&gt;x&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; by &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;δ&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;\delta&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.69444em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.03785em;&quot;&gt;δ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;, the loss function is updated to include this perturbation.&lt;br&gt;
+&lt;span class=&quot;katex-display&quot;&gt;&lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;munder&gt;&lt;mi&gt;min&lt;/mi&gt;&lt;mo&gt;⁡&lt;/mo&gt;&lt;mi&gt;θ&lt;/mi&gt;&lt;/munder&gt;&lt;mo fence=&quot;false&quot;&gt;[&lt;/mo&gt;&lt;msub&gt;&lt;mi mathvariant=&quot;double-struck&quot;&gt;E&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo separator=&quot;true&quot;&gt;,&lt;/mo&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo&gt;∼&lt;/mo&gt;&lt;mrow&gt;&lt;mi mathvariant=&quot;script&quot;&gt;D&lt;/mi&gt;&lt;/mrow&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;[&lt;/mo&gt;&lt;munder&gt;&lt;munder&gt;&lt;mrow&gt;&lt;munder&gt;&lt;mi&gt;max&lt;/mi&gt;&lt;mo&gt;⁡&lt;/mo&gt;&lt;mrow&gt;&lt;mi&gt;δ&lt;/mi&gt;&lt;mo&gt;∈&lt;/mo&gt;&lt;mrow&gt;&lt;mi mathvariant=&quot;script&quot;&gt;S&lt;/mi&gt;&lt;/mrow&gt;&lt;/mrow&gt;&lt;/munder&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;δ&lt;/mi&gt;&lt;mo separator=&quot;true&quot;&gt;,&lt;/mo&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo separator=&quot;true&quot;&gt;,&lt;/mo&gt;&lt;mi&gt;θ&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;]&lt;/mo&gt;&lt;/mrow&gt;&lt;mo stretchy=&quot;true&quot;&gt;⎵&lt;/mo&gt;&lt;/munder&gt;&lt;mtext&gt;inner maximization&lt;/mtext&gt;&lt;/munder&gt;&lt;mo fence=&quot;false&quot;&gt;]&lt;/mo&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;.&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;\min_{\theta}\bigg[\mathbb{E}_{x,y \sim \mathcal{D}}[\underbrace{\max_{\delta \in \mathcal{S}}L(x + \delta, y, \theta)]}_\text{inner maximization}\bigg].&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:1.45em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:3.54498em;vertical-align:-2.0949799999999996em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mop op-limits&quot;&gt;&lt;span class=&quot;vlist-t vlist-t2&quot;&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.66786em;&quot;&gt;&lt;span style=&quot;top:-2.047892em;margin-left:0em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:2.7em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;sizing reset-size6 size3 mtight&quot;&gt;&lt;span class=&quot;mord mtight&quot;&gt;&lt;span class=&quot;mord mathit mtight&quot; style=&quot;margin-right:0.02778em;&quot;&gt;θ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;top:-2.7em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:2.7em;&quot;&gt;&lt;/span&gt;&lt;span&gt;&lt;span class=&quot;mop&quot;&gt;min&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-s&quot;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.7521079999999999em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.16666666666666666em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;delimsizing size3&quot;&gt;[&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mord mathbb&quot;&gt;E&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;msupsub&quot;&gt;&lt;span class=&quot;vlist-t vlist-t2&quot;&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.328331em;&quot;&gt;&lt;span style=&quot;top:-2.5500000000000003em;margin-right:0.05em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:2.7em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;sizing reset-size6 size3 mtight&quot;&gt;&lt;span class=&quot;mord mtight&quot;&gt;&lt;span class=&quot;mord mathit mtight&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;mpunct mtight&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mord mathit mtight&quot; style=&quot;margin-right:0.03588em;&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;mrel mtight&quot;&gt;∼&lt;/span&gt;&lt;span class=&quot;mord mtight&quot;&gt;&lt;span class=&quot;mord mathcal mtight&quot; style=&quot;margin-right:0.02778em;&quot;&gt;D&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-s&quot;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.286108em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;mopen&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mord munder&quot;&gt;&lt;span class=&quot;vlist-t vlist-t2&quot;&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.7500000000000002em;&quot;&gt;&lt;span style=&quot;top:-0.9050200000000004em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:3em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;sizing reset-size6 size3 mtight&quot;&gt;&lt;span class=&quot;mord text mtight&quot;&gt;&lt;span class=&quot;mord mtight&quot;&gt;inner maximization&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;top:-3em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:3em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord munder&quot;&gt;&lt;span class=&quot;vlist-t vlist-t2&quot;&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.7500000000000001em;&quot;&gt;&lt;span class=&quot;svg-align&quot; style=&quot;top:-1.5725220000000002em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:3em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;stretchy&quot; style=&quot;height:0.548em;min-width:1.6em;&quot;&gt;&lt;span class=&quot;brace-left&quot; style=&quot;height:0.548em;&quot;&gt;&lt;svg width=&quot;400em&quot; height=&quot;0.548em&quot; viewBox=&quot;0 0 400000 548&quot; preserveAspectRatio=&quot;xMinYMin slice&quot;&gt;&lt;path d=&quot;M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;span class=&quot;brace-center&quot; style=&quot;height:0.548em;&quot;&gt;&lt;svg width=&quot;400em&quot; height=&quot;0.548em&quot; viewBox=&quot;0 0 400000 548&quot; preserveAspectRatio=&quot;xMidYMin slice&quot;&gt;&lt;path d=&quot;M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;span class=&quot;brace-right&quot; style=&quot;height:0.548em;&quot;&gt;&lt;svg width=&quot;400em&quot; height=&quot;0.548em&quot; viewBox=&quot;0 0 400000 548&quot; preserveAspectRatio=&quot;xMaxYMin slice&quot;&gt;&lt;path d=&quot;M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;top:-3em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:3em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mop op-limits&quot;&gt;&lt;span class=&quot;vlist-t vlist-t2&quot;&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.43055999999999994em;&quot;&gt;&lt;span style=&quot;top:-2.047892em;margin-left:0em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:2.7em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;sizing reset-size6 size3 mtight&quot;&gt;&lt;span class=&quot;mord mtight&quot;&gt;&lt;span class=&quot;mord mathit mtight&quot; style=&quot;margin-right:0.03785em;&quot;&gt;δ&lt;/span&gt;&lt;span class=&quot;mrel mtight&quot;&gt;∈&lt;/span&gt;&lt;span class=&quot;mord mtight&quot;&gt;&lt;span class=&quot;mord mathcal mtight&quot; style=&quot;margin-right:0.075em;&quot;&gt;S&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;top:-2.7em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:2.7em;&quot;&gt;&lt;/span&gt;&lt;span&gt;&lt;span class=&quot;mop&quot;&gt;max&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-s&quot;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.7794779999999999em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.16666666666666666em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathit&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;mopen&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mord mathit&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.2222222222222222em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mbin&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.2222222222222222em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.03785em;&quot;&gt;δ&lt;/span&gt;&lt;span class=&quot;mpunct&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.16666666666666666em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.03588em;&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;mpunct&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.16666666666666666em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.02778em;&quot;&gt;θ&lt;/span&gt;&lt;span class=&quot;mclose&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;mclose&quot;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-s&quot;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:1.4274779999999998em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-s&quot;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:2.0949799999999996em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;delimsizing size3&quot;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The min-max formulation, as evident from its name, consists of a minimization problem and a maximization problem. The &lt;em&gt;inner maximization problem&lt;/em&gt; is tasked with adding a perturbation to the input x which achieves a higher loss. On the other hand, the goal of the &lt;em&gt;outer minimization problem&lt;/em&gt; is to learn model parameters &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;θ&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;\theta&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.69444em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.02778em;&quot;&gt;θ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; minimizing the loss which is being maximized by the inner maximization.&lt;/p&gt;
+&lt;p&gt;According to this definition, if the adversarial loss of a model is small for all adversarial examples &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;δ&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;x+\delta&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.77777em;vertical-align:-0.08333em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.2222222222222222em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mbin&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.2222222222222222em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.03785em;&quot;&gt;δ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;, the model should be robust for all allowed adversarial attacks.&lt;/p&gt;
+&lt;h3 class=&quot;mume-header&quot; id=&quot;how-to-solve-this-min-max-optimization-problem&quot;&gt;How to solve this min-max optimization problem?&lt;/h3&gt;
+
+&lt;p&gt;Stochastic Gradient Descent (SGD) based backpropagation can not be directly applied as this optimization problem is non-convex. Lyu et al., obtained a closed form solution for &lt;em&gt;worst-case&lt;/em&gt; &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;δ&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;\delta&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.69444em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.03785em;&quot;&gt;δ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; by first approximating the inner maximization problem with Taylor series and then applying Lagrangian multiplier method. This simplifies the optimization problem to minimizing &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;δ&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;L(x+\delta)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.75em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:1em;vertical-align:-0.25em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord mathit&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;mopen&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mord mathit&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.2222222222222222em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mbin&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mord rule&quot; style=&quot;margin-right:0.2222222222222222em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.03785em;&quot;&gt;δ&lt;/span&gt;&lt;span class=&quot;mclose&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;, which can be written as a regularization term with Taylor series. For &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;∞&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&quot;application/x-tex&quot;&gt;l_{\infty}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;strut bottom&quot; style=&quot;height:0.84444em;vertical-align:-0.15em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mord mathit&quot; style=&quot;margin-right:0.01968em;&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;msupsub&quot;&gt;&lt;span class=&quot;vlist-t vlist-t2&quot;&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.151392em;&quot;&gt;&lt;span style=&quot;top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;&quot;&gt;&lt;span class=&quot;pstrut&quot; style=&quot;height:2.7em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;sizing reset-size6 size3 mtight&quot;&gt;&lt;span class=&quot;mord mtight&quot;&gt;&lt;span class=&quot;mord mtight&quot;&gt;∞&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-s&quot;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;vlist-r&quot;&gt;&lt;span class=&quot;vlist&quot; style=&quot;height:0.15em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;-bounded attacks (commonly used type of attacks) this simplified formulation becomes identical to the &lt;a href=&quot;https://arxiv.org/abs/1412.6572&quot;&gt;fast gradient sign (FGSM) attack&lt;/a&gt;.&lt;/p&gt;
+
+      &lt;/div&gt;
+      
+      
+    &lt;/body&gt;
+    
+    
+    
+    
+    
+    
+    
+  &lt;/html&gt;</content><author><name></name></author><summary type="html">Deep Learning Models Resistant to Adversarial Attacks</summary></entry><entry><title type="html">Reading list - Compression of Deep Neural Networks</title><link href="http://localhost:4000/reading-list-Deep-compression/" rel="alternate" type="text/html" title="Reading list - Compression of Deep Neural Networks" /><published>2018-04-13T00:00:00+09:00</published><updated>2018-04-13T00:00:00+09:00</updated><id>http://localhost:4000/reading-list-Deep-compression</id><content type="html" xml:base="http://localhost:4000/reading-list-Deep-compression/">&lt;p&gt;Here is a list some of the papers I had read as literature review for the &lt;a href=&quot;https://www.jst.go.jp/kisoken/crest/en/project/1111094/1111094_07.html&quot;&gt;“CREST Deep”&lt;/a&gt; project. This project is funded by Japan Science and Technology Agency (JST). Our goal is to make the DNN models smaller, so they take less disk space, but without having a significant impact on the accuracy.&lt;/p&gt;
 
 &lt;p class=&quot;notice&quot;&gt;&lt;a href=&quot;https://papers.nips.cc/paper/6687-compression-aware-training-of-deep-networks&quot;&gt;&lt;strong&gt;Compression-aware Training of Deep Networks&lt;/strong&gt;&lt;/a&gt;. Alvarez and Salzmann. NIPS 2017&lt;/p&gt;
 &lt;blockquote&gt;
@@ -7,7 +330,7 @@
 
 &lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;Do Deep Convolutional Nets Really Need to be Deep and Convolutional?&lt;/strong&gt; Gregor Urban et al. ICLR 2017&lt;/p&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;This can be considered as a response to the NIPS 2014 paper “Do deep nets really need to be deep?” (Ba and Caruana, 2014). They train shallowe Colnvolutional Neural Networks using network distillation on an ensemble of state-of-the-art CNNs on CIFAR-10 dataset. Their results suggest that to achieve similar accuracy with a shallow student model, it should possess much more parameters than the deep teacher model (can be 30 times larger than the deep teacher model). Still the accuracy may not reach the level of the teacher model.&lt;/p&gt;
+  &lt;p&gt;This can be considered as a response to the NIPS 2014 paper “Do deep nets really need to be deep?” (Ba and Caruana, 2014). They train shallow Colnvolutional Neural Networks using network distillation on an ensemble of state-of-the-art CNNs on CIFAR-10 dataset. Their results suggest that to achieve similar accuracy with a shallow student model, it should possess much more parameters than the deep teacher model (can be 30 times larger than the deep teacher model). Still the accuracy may not reach the level of the teacher model.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications&lt;/strong&gt;. Howard et al. (Google Inc.) Arxiv preprint [27th April 2017]&lt;/p&gt;
