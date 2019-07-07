@@ -20,7 +20,7 @@ layout: page
 ## Publications
 <p><a href="https://scholar.google.com/citations?user=5ZSfU5wAAAAJ&hl=en">Google Scholar</a></p>
 
-* **Kaushalya MAdhawa**, Katushiko Ishiguro, Kosuke Nakago, and Motoki Abe, "GraphNVP: An Invertible Flow Model for Generating Molecular Graphs", preprint, [[Arxiv]](https://arxiv.org/abs/1905.11600)
+* **Kaushalya Madhawa**, Katushiko Ishiguro, Kosuke Nakago, and Motoki Abe, "GraphNVP: An Invertible Flow Model for Generating Molecular Graphs", preprint, [[Arxiv]](https://arxiv.org/abs/1905.11600)
 * **Kaushalya Madhawa** and Tsuyoshi Murata, "Exploring Partially Observed Networks with Non-parametric Bandits", Complex Networks and Their Applications VII, Cambridge, UK, 2018
 	<a href="https://link.springer.com/chapter/10.1007/978-3-030-05414-4_13#citeas"> [springer.com] </a> <a href="https://arxiv.org/abs/1804.07059"> [Arxiv]</a>
 * **Kaushalya Madhawa**, Choong Jun Jin, Arie Wahyu Wijayanto, and Tsuyoshi Murata, "Robustness of Compressed Convolutional Neural Networks", Workshop on Big Data for CyberSecurity (BigCyber-2018), IEEE International Conference on Big Data, Seattle, Washington, 2018
