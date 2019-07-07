@@ -17,21 +17,19 @@ layout: page
 	<h2>Publications</h2>
 </div> -->
 
-<h2>Publications</h2>
+## Publications
 <p><a href="https://scholar.google.com/citations?user=5ZSfU5wAAAAJ&hl=en">Google Scholar</a></p>
-<ul class="paper-list">
-	<li><b>Kaushalya Madhawa</b> and Tsuyoshi Murata, "Exploring Partially Observed Networks with Non-parametric Bandits", Complex Networks and Their Applications VII, Cambridge, UK, 2018
-	<a href="https://link.springer.com/chapter/10.1007/978-3-030-05414-4_13#citeas"> [springer.com] </a> <a href="https://arxiv.org/abs/1804.07059"> [Arxiv]</a> </li>
-	<li><b>Kaushalya Madhawa</b>, Choong Jun Jin, Arie Wahyu Wijayanto, and Tsuyoshi Murata, "Robustness of Compressed Convolutional Neural Networks", Workshop on Big Data for CyberSecurity (BigCyber-2018), IEEE International Conference on Big Data, Seattle, Washington, 2018</li>
-	<li><b>P.K.K.Madhawa</b> and A.S. Athukorale, A Robust Algorithm for Determining the Newsworthiness of Microblogs", International Conference on Advances in ICT for Emerging Regions (ICTer), Colombo, Sri Lanka, 2015</li>
-</ul>
 
-<h2>Skills</h2>
-<ul class="skill-list">
-	<li>Languages: Python, Java, C/C++, R </li>
-	<li>Deep Learning Frameworks: Chainer, PyTorch, Caffe, Tensorflow</li>
-	<li>General Machine Learning Frameworks: Scikit Learn, NetworkX</li>
-</ul>
+* **Kaushalya MAdhawa**, Katushiko Ishiguro, Kosuke Nakago, and Motoki Abe, "GraphNVP: An Invertible Flow Model for Generating Molecular Graphs", preprint, [[Arxiv]](https://arxiv.org/abs/1905.11600)
+* **Kaushalya Madhawa** and Tsuyoshi Murata, "Exploring Partially Observed Networks with Non-parametric Bandits", Complex Networks and Their Applications VII, Cambridge, UK, 2018
+	<a href="https://link.springer.com/chapter/10.1007/978-3-030-05414-4_13#citeas"> [springer.com] </a> <a href="https://arxiv.org/abs/1804.07059"> [Arxiv]</a>
+* **Kaushalya Madhawa**, Choong Jun Jin, Arie Wahyu Wijayanto, and Tsuyoshi Murata, "Robustness of Compressed Convolutional Neural Networks", Workshop on Big Data for CyberSecurity (BigCyber-2018), IEEE International Conference on Big Data, Seattle, Washington, 2018</* **P.K.K.Madhawa** and A.S. Athukorale, A Robust Algorithm for Determining the Newsworthiness of Microblogs", International Conference on Advances in ICT for Emerging Regions (ICTer), Colombo, Sri Lanka, 2015
+
+## Skills
+
+* Languages: Python, Java, C/C++, R
+* Deep Learning Frameworks: Chainer, PyTorch, Caffe, Tensorflow
+* General Machine Learning Frameworks: Scikit Learn, NetworkX
 
 <h2>Links</h2>
 <ul>
