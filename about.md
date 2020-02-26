@@ -5,11 +5,11 @@ layout: page
 ## Kaushalya Madhawa
 <!-- ![Profile Image]({{ site.url }}/{{ site.picture }}) -->
 
-<p>I am a PhD student at Tokyo Institute of Technology - School of Computing. My research is on development of new machine learning techniques for graph data.</p>
+I am a PhD candidate at Tokyo Institute of Technology - School of Computing. My research is on development of new machine learning techniques for graph data.
 
-<p>Additionally, I work as a research assistant for <a href="https://www.jst.go.jp/kisoken/crest/en/project/1111094/1111094_07.html">"CREST Deep"</a> project, funded by Japan Science and Technology Agency (JST). I'm working with other PhD students of Murata Lab on compressing Deep Neural Networks (DNNs) without compromising the accuracy.</p>
+Additionally, I work as a research assistant for <a href="https://www.jst.go.jp/kisoken/crest/en/project/1111094/1111094_07.html">"CREST Deep"</a> project, funded by Japan Science and Technology Agency (JST). Motivation of this project is to compress Deep Neural Networks (DNNs) without compromising the accuracy.
 
-<p> I did a research internship at <a href="https://www.preferred-networks.jp/en/">Preferred Networks Inc.</a>, in the summer of 2018.</p>
+In 2018 summer, I was lucky to do a research internship at <a href="https://www.preferred-networks.jp/en/">Preferred Networks Inc</a>. I was involved in designing deep generative models for generating molecular graphs. This work resulted in [GrapNVP](https://preferredresearch.jp/2019/07/16/graphnvp), the first normalizing-flow based model for generating attributed graphs.
 
 
 <!-- <div class="header">
@@ -29,7 +29,7 @@ layout: page
 ## Skills
 
 * Languages: Python, Java, C/C++, R
-* Deep Learning Frameworks: Chainer, PyTorch, Caffe, Tensorflow
+* Deep Learning Frameworks: PyTorch, Chainer, Caffe, Tensorflow
 * General Machine Learning Frameworks: Scikit Learn, NetworkX
 
 <h2>Links</h2>

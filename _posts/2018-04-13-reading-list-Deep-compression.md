@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Reading list - Compression of Deep Neural Networks
+title: ":books: Reading list - Compression of Deep Neural Networks"
 excerpt: Deep neural network compression literature research organized chronologically.
 categories:
   - Deep Neural Networks
@@ -9,7 +9,8 @@ author: Kaushalya
 pinned: true
 published: true
 category: blog
---- 
+---
+# Reading list - Compression of Deep Neural Networks
 
 Here is a list some of the papers I had read as literature review for the ["CREST Deep"](https://www.jst.go.jp/kisoken/crest/en/project/1111094/1111094_07.html) project. This project is funded by Japan Science and Technology Agency (JST). Our goal is to make the DNN models smaller, so they take less disk space, but without having a significant impact on the accuracy.
 
@@ -32,5 +33,3 @@ Here is a list some of the papers I had read as literature review for the ["CRES
 **Learning Structured Sparsity in Deep Neural Networks**. Wen et al., NIPS. 2016
 {: .notice}
 > This paper was [presented](http://papers.nips.cc/paper/6504-learning-structured-sparsity-in-deep-neural-networks) a poster at NIPS 2016. This paper introduces group lasso based sparsity regularization to zero out all weights in some structures (filters, channels, and layers) without a significant drop of classification accuracy.
-
-
