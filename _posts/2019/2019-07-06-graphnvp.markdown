@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ":science: GraphNVP: An Invertible Flow Model for Generating Molecular Graphs"
+title: "📜 GraphNVP: An Invertible Flow Model for Generating Molecular Graphs"
 excerpt: Our proposed model for generating molecular Graphs.
 categories:
  - Deep Neural Networks

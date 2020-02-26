@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ":books: Reading list - Compression of Deep Neural Networks"
+title: "📚 Reading list - Compression of Deep Neural Networks"
 excerpt: Deep neural network compression literature research organized chronologically.
 categories:
   - Deep Neural Networks

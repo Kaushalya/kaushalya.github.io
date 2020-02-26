@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ":notebook: Towards Deep Learning Models Resistant to Adversarial Attacks - A review"
+title: "👾 Towards Deep Learning Models Resistant to Adversarial Attacks - A review"
 excerpt: A review of ICLR 2018 paper "Towards Deep Learning Models Resistant to Adversarial Attacks"
 categories:
   - Deep Neural Networks
