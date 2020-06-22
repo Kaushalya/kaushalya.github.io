@@ -20,6 +20,7 @@ In 2018 summer, I was lucky to do a research internship at <a href="https://www.
 ## Publications
 <p><a href="https://scholar.google.com/citations?user=5ZSfU5wAAAAJ&hl=en">Google Scholar</a></p>
 
+* **Kaushalya Madhawa** and Tsuyoshi Murata, "Active Learning on Graphs via Meta Learning", Graph Representation and Beyond (GRL+) Workshop, International Conference on Machine Learning (ICML), 2020
 * **Kaushalya Madhawa**, Katushiko Ishiguro, Kosuke Nakago, and Motoki Abe, "GraphNVP: An Invertible Flow Model for Generating Molecular Graphs", preprint, [[Arxiv]](https://arxiv.org/abs/1905.11600)
 * **Kaushalya Madhawa** and Tsuyoshi Murata, "Exploring Partially Observed Networks with Non-parametric Bandits", Complex Networks and Their Applications VII, Cambridge, UK, 2018
 	<a href="https://link.springer.com/chapter/10.1007/978-3-030-05414-4_13#citeas"> [springer.com] </a> <a href="https://arxiv.org/abs/1804.07059"> [Arxiv]</a>
