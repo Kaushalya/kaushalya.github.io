@@ -14,7 +14,7 @@ picture: assets/images/profile_edited.jpg
 # and specify source (external or local).
 resume: true
 resume-external: false
-resume-url: assets/resume_feb2020.pdf
+resume-url: assets/resume.pdf
 
 url: https://kaushalya.github.io
 #markdown: redcarpet
