@@ -9,7 +9,7 @@ I am a PhD candidate at Tokyo Institute of Technology - School of Computing. My 
 
 Additionally, I work as a research assistant for <a href="https://www.jst.go.jp/kisoken/crest/en/project/1111094/1111094_07.html">"CREST Deep"</a> project, funded by Japan Science and Technology Agency (JST). Motivation of this project is to compress Deep Neural Networks (DNNs) without compromising the accuracy.
 
-In 2018 summer, I was lucky to do a research internship at <a href="https://www.preferred-networks.jp/en/">Preferred Networks Inc</a>. I was involved in designing deep generative models for generating molecular graphs. This work resulted in [GrapNVP](https://preferredresearch.jp/2019/07/16/graphnvp), the first normalizing-flow based model for generating attributed graphs.
+In 2018 summer, I did a research internship at <a href="https://www.preferred-networks.jp/en/">Preferred Networks Inc</a>. I was involved in designing deep generative models for generating molecular graphs. This work resulted in [GraphNVP](https://preferredresearch.jp/2019/07/16/graphnvp), the first normalizing-flow based model for generating attributed graphs.
 
 
 <!-- <div class="header">
@@ -21,7 +21,7 @@ In 2018 summer, I was lucky to do a research internship at <a href="https://www.
 <p><a href="https://scholar.google.com/citations?user=5ZSfU5wAAAAJ&hl=en">Google Scholar</a></p>
 
 * **Kaushalya Madhawa** and Tsuyoshi Murata, ["Active Learning on Graphs via Meta Learning"](https://grlplus.github.io/papers/96.pdf), Graph Representation and Beyond (GRL+) Workshop, International Conference on Machine Learning (ICML), 2020
-* **Kaushalya Madhawa**, Katushiko Ishiguro, Kosuke Nakago, and Motoki Abe, "GraphNVP: An Invertible Flow Model for Generating Molecular Graphs", preprint, [[Arxiv]](https://arxiv.org/abs/1905.11600)
+* **Kaushalya Madhawa**, Katushiko Ishiguro, Kosuke Nakago, and Motoki Abe, "GraphNVP: An Invertible Flow Model for Generating Molecular Graphs", preprint, 2019 [[Arxiv]](https://arxiv.org/abs/1905.11600)
 * **Kaushalya Madhawa** and Tsuyoshi Murata, "Exploring Partially Observed Networks with Non-parametric Bandits", Complex Networks and Their Applications VII, Cambridge, UK, 2018
 	<a href="https://link.springer.com/chapter/10.1007/978-3-030-05414-4_13#citeas"> [springer.com] </a> <a href="https://arxiv.org/abs/1804.07059"> [Arxiv]</a>
 * **Kaushalya Madhawa**, Choong Jun Jin, Arie Wahyu Wijayanto, and Tsuyoshi Murata, "Robustness of Compressed Convolutional Neural Networks", Workshop on Big Data for CyberSecurity (BigCyber-2018), IEEE International Conference on Big Data, Seattle, Washington, 2018
@@ -33,7 +33,7 @@ In 2018 summer, I was lucky to do a research internship at <a href="https://www.
 * Deep Learning Frameworks: PyTorch, Chainer, Caffe, Tensorflow
 * General Machine Learning Frameworks: Scikit Learn, NetworkX
 
-<h2>Links</h2>
+## Links
 <ul>
 	<li><a href="https://net-titech.github.io/articles/2017-02/deep-compression">Deep Compression</a></li>
 	<li><a href="https://github.com/Kaushalya/cleverhans">Evaluation of robustness of compressed DNNs</a></li>
