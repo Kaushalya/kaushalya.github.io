@@ -25,9 +25,12 @@ In 2018 summer, I did a research internship at <a href="https://www.preferred-ne
 * **Kaushalya Madhawa** and Tsuyoshi Murata, ["Active Learning on Graphs via Meta Learning"](https://grlplus.github.io/papers/96.pdf), _Graph Representation and Beyond (GRL+) Workshop, International Conference on Machine Learning (ICML)_, 2020
 
 * **Kaushalya Madhawa**, Katushiko Ishiguro, Kosuke Nakago, and Motoki Abe, "GraphNVP: An Invertible Flow Model for Generating Molecular Graphs", _Arxiv preprint_, 2019 [[Arxiv]](https://arxiv.org/abs/1905.11600)
+
 * **Kaushalya Madhawa** and Tsuyoshi Murata, "Exploring Partially Observed Networks with Non-parametric Bandits", _Conference on Complex Networks and Their Applications_, Cambridge, UK, 2018
 	<a href="https://link.springer.com/chapter/10.1007/978-3-030-05414-4_13#citeas"> [springer.com] </a> <a href="https://arxiv.org/abs/1804.07059"> [Arxiv]</a>
+
 * **Kaushalya Madhawa**, Choong Jun Jin, Arie Wahyu Wijayanto, and Tsuyoshi Murata, "Robustness of Compressed Convolutional Neural Networks", _Workshop on Big Data for CyberSecurity (BigCyber-2018)_, IEEE International Conference on Big Data, Seattle, Washington, 2018
+
 * **P.K.K.Madhawa** and A.S. Athukorale, A Robust Algorithm for Determining the Newsworthiness of Microblogs", _International Conference on Advances in ICT for Emerging Regions (ICTer)_, Colombo, Sri Lanka, 2015
 
 ## Skills
