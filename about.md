@@ -5,9 +5,11 @@ layout: page
 ## Kaushalya Madhawa
 <!-- ![Profile Image]({{ site.url }}/{{ site.picture }}) -->
 
-I am a PhD candidate at Tokyo Institute of Technology - School of Computing. My research is on development of new machine learning techniques for graph data.
+I'm a research engineer at [Lily MedTech Inc.](https://www.lilymedtech.com/company/), a medical AI startup based in Tokyo.
 
-Additionally, I work as a research assistant for <a href="https://www.jst.go.jp/kisoken/crest/en/project/1111094/1111094_07.html">"CREST Deep"</a> project, funded by Japan Science and Technology Agency (JST). Motivation of this project is to compress Deep Neural Networks (DNNs) without compromising the accuracy.
+I obtained a PhD in computer science majoring artificial intelligence from Tokyo Institute of Technology in 2021.
+
+<!-- Additionally, I work as a research assistant for <a href="https://www.jst.go.jp/kisoken/crest/en/project/1111094/1111094_07.html">"CREST Deep"</a> project, funded by Japan Science and Technology Agency (JST). Motivation of this project is to compress Deep Neural Networks (DNNs) without compromising the accuracy. -->
 
 In 2018 summer, I did a research internship at <a href="https://www.preferred-networks.jp/en/">Preferred Networks Inc</a>. I was involved in designing deep generative models for generating molecular graphs. This work resulted in [GraphNVP](https://preferredresearch.jp/2019/07/16/graphnvp), the first normalizing-flow based model for generating attributed graphs.
 

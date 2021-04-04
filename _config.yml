@@ -1,6 +1,6 @@
 # main text of home
 name: Kaushalya Madhawa
-bio: PhD student at Department of Computer Science, TokyoTech
+bio: Research Engineer at Lily MedTech Inc., Tokyo. PhD in Computer Science from Tokyo Institute of Technology.
 
 # twitter summary info
 description: A blog about technology and stuff related
@@ -51,15 +51,15 @@ github: Kaushalya
 #medium: medium
 # vimeo: myvimeo
 # lanyrd: mylanyrd
-email: kaushalya@net.c.titech.ac.jp
+email: kaushalya.madhawa@gmail.com
 
 authors:
-    kaumad:
-        name: Kaushalya Madhawa
-        bio: PhD student at Department of Computer Science, TokyoTech
-        external-image: false
-        picture: assets/images/profile.jpg
-        twitter: kau_mad
+  kaumad:
+    name: Kaushalya Madhawa
+    bio: PhD student at Department of Computer Science, TokyoTech
+    external-image: false
+    picture: assets/images/profile.jpg
+    twitter: kau_mad
 
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
@@ -103,4 +103,4 @@ plugins:
   - jekyll-admin
 
 jekyll-mentions:
-    base_url: https://github.com
+  base_url: https://github.com
