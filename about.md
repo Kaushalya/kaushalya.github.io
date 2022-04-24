@@ -5,7 +5,7 @@ layout: page
 ## Kaushalya Madhawa
 <!-- ![Profile Image]({{ site.url }}/{{ site.picture }}) -->
 
-I'm a research engineer at [Lily MedTech Inc.](https://www.lilymedtech.com/company/), a medical AI startup based in Tokyo.
+I'm a research engineer at [Lily MedTech Inc.](https://www.lilymedtech.com/company/), a medical AI startup based in Tokyo. I'm working on research and development of computer vision techniques for a novel ultrasound computed tomography (USCT) device.
 
 I obtained a PhD in computer science majoring artificial intelligence from Tokyo Institute of Technology in 2021.
 
