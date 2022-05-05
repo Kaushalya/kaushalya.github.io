@@ -11,7 +11,6 @@ pinned: true
 published: true 
 category: project
 ---
-# MedCLIP: A pre-trained CLIP model for medical image search
 
 <!-- ![Logo](../assets/medclip_logo.png) -->
 <div style="text-align: center;">
