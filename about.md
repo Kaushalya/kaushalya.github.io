@@ -4,6 +4,7 @@ layout: page
 ---
 ## Kaushalya Madhawa
 <!-- ![Profile Image]({{ site.url }}/{{ site.picture }}) -->
+<a href="https://kaushalya-ml.notion.site/Reading-List-062ef4b2952748aaa3bb86deaf37278d">📚 Reading List</a>
 
 I'm a research engineer at [Lily MedTech Inc.](https://www.lilymedtech.com/company/), a medical AI startup based in Tokyo. I'm working on research and development of computer vision techniques for a novel ultrasound computed tomography (USCT) device.
 
