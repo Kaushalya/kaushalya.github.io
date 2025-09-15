@@ -2,6 +2,34 @@
 
 Personal page built with [Indigo Minimalist Jekyll template](http://sergiokopplin.github.io/indigo/).
 
+## Running the Blog Locally
+
+To run this Jekyll blog locally:
+
+1. **Install prerequisites:**
+    - Ruby (see `.ruby-version` for recommended version)
+    - Bundler (`gem install bundler`)
+    - Ruby development headers (e.g., `ruby-dev` on Debian/Ubuntu)
+
+2. **Install dependencies:**
+    ```bash
+    bundle install
+    ```
+
+3. **Serve the site locally:**
+    ```bash
+    bundle exec jekyll serve
+    ```
+    The site will be available at [http://localhost:4000](http://localhost:4000) by default. The server will watch for changes and reload automatically.
+
+4. **Alternative:**
+    You can also use the provided Rake task:
+    ```bash
+    rake site
+    ```
+
+See below for troubleshooting tips if you encounter permission errors with Bundler.
+
 ## Prerequisites
 
 - Ruby (see `.ruby-version` for recommended version)

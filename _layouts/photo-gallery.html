@@ -1,0 +1,23 @@
+---
+layout: default
+---
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+  {%- if site.photos.size > 0 -%}
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem;">
+    {%- for photo_post in site.photos reversed -%}
+      <a href="{{ photo_post.url | relative_url }}" style="text-decoration: none; color: inherit;">
+        <div class="photo-thumbnail">
+          <img src="{{ photo_post.images[0] | relative_url }}" alt="{{ photo_post.title }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px;">
+          <h3 style="margin-top: 0.5rem; font-size: 1rem; font-weight: normal;">{{ photo_post.title }}</h3>
+        </div>
+      </a>
+    {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>

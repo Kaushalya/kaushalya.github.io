@@ -16,6 +16,19 @@ resume: true
 resume-external: false
 resume-url: assets/resume.pdf
 
+# Collections
+collections:
+  photos:
+    output: true
+    permalink: /photos/:name
+
+defaults:
+  - scope:
+      path: ""
+      type: "photos"
+    values:
+      layout: "photo"
+
 url: https://kaushalya.github.io
 #markdown: redcarpet
 # your url: http://USERNAME.github.io
@@ -70,12 +83,11 @@ width: normal
 # paginate: 5
 # paginate_path: "blog/:num/"
 
-# if you don't need projects, comment the *projects* configs below
-projects: true
-
 # if you don't need "about" or "blog", comment them out below
 about: true
 blog: true
+photos: true
+projects: true
 
 # do you want to show the "read time" of the posts?
 #read-time: true
