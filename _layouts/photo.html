@@ -2,7 +2,53 @@
 layout: default
 ---
 <article class="post">
+  <header>
+    {% if page.title %}<h1 class="post-title">{{ page.title }}</h1>{% endif %}
+    {% if page.date %}<p class="post-date">{{ page.date | date: "%b %d, %Y" }}</p>{% endif %}
+    {% if page.tags %}
+      <p class="post-tags">
+        {% for tag in page.tags %}<span class="tag">#{{ tag }}</span> {% endfor %}
+      </p>
+    {% endif %}
+  </header>
+
   <div class="post-content">
     {{ content }}
   </div>
+
+  {% assign imgs = page.images | default: page.image %}
+  {% if imgs %}
+    {% comment %}
+      If `images:` is an array render a grid; if it's a single string still handle gracefully.
+    {% endcomment %}
+    <div class="photo-grid">
+      {% if imgs.first and imgs.size %}
+        {% for img in imgs %}
+          <figure class="photo-grid-item">
+            <a href="{{ img | relative_url }}" class="photo-link" target="_blank" rel="noopener">
+              <img src="{{ img | relative_url }}" alt="{{ page.title }} photo {{ forloop.index }}" loading="lazy" />
+            </a>
+            {% if page.captions and page.captions[forloop.index0] %}
+              <figcaption>{{ page.captions[forloop.index0] }}</figcaption>
+            {% endif %}
+          </figure>
+        {% endfor %}
+      {% else %}
+        <figure class="photo-grid-item single">
+          <img src="{{ imgs | relative_url }}" alt="{{ page.title }}" />
+        </figure>
+      {% endif %}
+    </div>
+  {% endif %}
 </article>
+
+<style>
+/* Inline minimal styles specific to photo layout to avoid adding new sass partial for now */
+.photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem; margin-top:1.5rem; }
+.photo-grid-item { margin:0; }
+.photo-grid-item img { width:100%; height:240px; object-fit:cover; border-radius:4px; box-shadow:0 2px 4px rgba(0,0,0,0.12); transition:transform .2s ease; }
+.photo-grid-item img:hover { transform:scale(1.02); }
+.photo-grid-item.single img { height:auto; object-fit:contain; }
+.post-tags .tag { background:#f2f2f2; border-radius:3px; padding:2px 6px; font-size:.75rem; margin-right:4px; }
+figcaption { font-size:.75rem; text-align:center; margin-top:.35rem; color:#555; }
+</style>
