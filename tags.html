@@ -36,19 +36,29 @@ title: Tags
         {%- assign tagged_docs = all_docs | where_exp: "d","d.tags contains t" | sort: "date" | reverse -%}
         <h2 class="title" id="{{ t_slug }}">#{{ t }}</h2>
         <ul class="list">
-            {%- for doc in tagged_docs -%}
-                <li class="item">
-                    <a class="url" href="{{ site.url }}{{ doc.url }}">
-                        <aside class="date">
-                            {%- if doc.date -%}
-                                <time datetime="{{ doc.date | date: "%Y-%m-%d" }}">{{ doc.date | date: "%b %d %Y" }}</time>
+                    {%- for doc in tagged_docs -%}
+                        {%- assign thumb = nil -%}
+                        {%- if doc.collection == "photos" -%}
+                            {%- if doc.images and doc.images.size > 0 -%}
+                                {%- assign thumb = doc.images[0] -%}
+                            {%- elsif doc.image -%}
+                                {%- assign thumb = doc.image -%}
                             {%- endif -%}
-                            {%- if doc.collection == "photos" -%}<span class="badge">📷</span>{%- endif -%}
-                        </aside>
-                        <h3 class="title">{{ doc.title }}</h3>
-                    </a>
-                </li>
-            {%- endfor -%}
+                        {%- endif -%}
+                        <li class="item tag-doc">
+                            <a class="url" href="{{ site.url }}{{ doc.url }}">
+                                <aside class="date">
+                                    {%- if doc.date -%}
+                                        <time datetime="{{ doc.date | date: "%Y-%m-%d" }}">{{ doc.date | date: "%b %d %Y" }}</time>
+                                    {%- endif -%}
+                                </aside>
+                                {%- if thumb -%}
+                                    <span class="thumb-wrapper"><img src="{{ thumb | relative_url }}" alt="{{ doc.title }} thumbnail" loading="lazy" /></span>
+                                {%- endif -%}
+                                <h3 class="title">{{ doc.title }}</h3>
+                            </a>
+                        </li>
+                    {%- endfor -%}
         </ul>
         <div class="breaker"></div>
     {%- endfor -%}
@@ -57,5 +67,13 @@ title: Tags
 <style>
 /* Tag count bubble */
 .tag-count { background:#f2f2f2; border-radius:10px; padding:2px 6px; font-size:0.65rem; margin-left:4px; }
-.tag-list .badge { margin-left:4px; }
+.tag-list .tag-doc { display:flex; align-items:center; }
+.tag-list .tag-doc .url { display:flex; align-items:center; gap:.5rem; width:100%; }
+.tag-list .tag-doc .thumb-wrapper { width:48px; height:48px; flex:0 0 48px; overflow:hidden; border-radius:4px; background:#f5f5f5; display:inline-block; }
+.tag-list .tag-doc .thumb-wrapper img { width:100%; height:100%; object-fit:cover; display:block; }
+.tag-list .tag-doc h3.title { margin:0; font-size:1rem; }
+.tag-list .tag-doc aside.date { min-width:85px; }
+@media (max-width:600px){
+    .tag-list .tag-doc aside.date { display:none; }
+}
 </style>
