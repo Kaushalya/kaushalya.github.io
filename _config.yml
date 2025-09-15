@@ -1,6 +1,6 @@
 # main text of home
 name: Kaushalya Madhawa
-bio: Machine learning engineer based in Tokyo. PhD in Computer Science from Tokyo Institute of Technology.
+bio: Machine learning engineer based in Tokyo.
 
 # twitter summary info
 description: A blog about machine learning
@@ -8,7 +8,7 @@ description: A blog about machine learning
 # if it's an external image, update below for true
 # better with square images
 external-image: false
-picture: assets/images/profile_edited.jpg
+picture: assets/images/profile.jpeg
 
 # If you want to include your resume, set to true
 # and specify source (external or local).
