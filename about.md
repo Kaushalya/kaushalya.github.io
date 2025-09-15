@@ -17,14 +17,6 @@ Research scientist at [SB Intuitions](https://www.sbintuitions.co.jp/en/), lever
 * **Kaushalya Madhawa**, Katushiko Ishiguro, Kosuke Nakago, and Motoki Abe, "GraphNVP: An Invertible Flow Model for Generating Molecular Graphs", _Arxiv preprint_, 2019 [[Arxiv]](https://arxiv.org/abs/1905.11600)
 
 * **Kaushalya Madhawa**, Choong Jun Jin, Arie Wahyu Wijayanto, and Tsuyoshi Murata, "Robustness of Compressed Convolutional Neural Networks", _Workshop on Big Data for CyberSecurity (BigCyber-2018)_, IEEE International Conference on Big Data, Seattle, Washington, 2018
-<!-- 
-* **P.K.K.Madhawa** and A.S. Athukorale, A Robust Algorithm for Determining the Newsworthiness of Microblogs", _International Conference on Advances in ICT for Emerging Regions (ICTer)_, Colombo, Sri Lanka, 2015 -->
-
-<!-- ## Skills
-
-* Languages: Python, Java, C/C++, R
-* Deep Learning Frameworks: PyTorch, Chainer, Caffe, Tensorflow
-* General Machine Learning Frameworks: Scikit Learn, NetworkX -->
 
 ## Links
 <ul>
