@@ -22,6 +22,6 @@ Research scientist at [SB Intuitions](https://www.sbintuitions.co.jp/en/), lever
 <ul>
 	<li><a href="https://github.com/Kaushalya/">Github</a></li>
 	<li><a href="https://kaushalya-ml.notion.site/Reading-List-062ef4b2952748aaa3bb86deaf37278d">📚 Reading List</a></li>
-	<li><a href="https://github.com/Kaushalya/cleverhans">Evaluation of robustness of compressed DNNs</a></li>
+	<li><a href="https://kaushalya.github.io/project_medclip ">MedCLIP: A multi-modal CLIP model trained on medical data</a></li>
 </ul>
 
