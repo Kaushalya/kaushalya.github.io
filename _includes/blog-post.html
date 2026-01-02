@@ -1,6 +1,6 @@
-<div class="item {% if post.star %}star{% endif %}">
-    <a class="url" href="{{ site.url }}{{ post.url }}">
-        <aside class="date"><time datetime="{{ post.date | date:"%d-%m-%Y" }}">{{ post.date | date: "%b %d %Y" }}</time></aside>
-        <h3 class="title">{{ post.title }}</h3>
-    </a>
-</div>
+<li class="item" itemscope itemtype="http://schema.org/BlogPosting">
+    <a class="url" href="{{ post.url | relative_url }}">
+        <h3 class="title" itemprop="name headline">{{ post.title }}</h3>
+        <p class="description" itemprop="description">
+            {% if post.description %}
+

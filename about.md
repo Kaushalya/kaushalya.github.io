@@ -27,6 +27,6 @@ Outside of work, I’m a casual runner and a coffee lover walking around Tokyo t
 <ul>
 	<li><a href="https://github.com/Kaushalya/">Github</a></li>
 	<li><a href="https://kaushalya-ml.notion.site/Reading-List-062ef4b2952748aaa3bb86deaf37278d">📚 Reading List</a></li>
-	<li><a href="https://kaushalya.github.io/project_medclip ">MedCLIP: A multi-modal CLIP model trained on medical data</a></li>
+	<li><a href="{{ '/project_medclip' | relative_url }}">MedCLIP: A multi-modal CLIP model trained on medical data</a></li>
 </ul>
 

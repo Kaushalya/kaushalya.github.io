@@ -46,7 +46,7 @@ title: Tags
                             {%- endif -%}
                         {%- endif -%}
                         <li class="item tag-doc">
-                            <a class="url" href="{{ site.url }}{{ doc.url }}">
+                            <a class="url" href="{{ doc.url | relative_url }}">
                                 <aside class="date">
                                     {%- if doc.date -%}
                                         <time datetime="{{ doc.date | date: "%Y-%m-%d" }}">{{ doc.date | date: "%b %d %Y" }}</time>
