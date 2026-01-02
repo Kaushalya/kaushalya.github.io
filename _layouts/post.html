@@ -16,7 +16,7 @@ layout: page
 {% if site.show-tags %}
     <div class="post-tags">
         {% for tag in page.tags %}
-            <a class="item" href="{{ '/tags/#' | append: tag | slugify | relative_url }}">{{ tag }}</a>
+            <a class="item" href="{{ tag | slugify | prepend: '/tags/#' | relative_url }}">{{ tag }}</a>
         {% endfor %}
     </div>
 {% endif %}
