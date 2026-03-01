@@ -286,7 +286,7 @@ GEM
       ttfunk
     public_suffix (5.1.1)
     racc (1.8.1)
-    rack (3.2.1)
+    rack (3.2.5)
     rack-protection (4.1.1)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
@@ -352,6 +352,7 @@ DEPENDENCIES
   github-pages
   html-proofer
   jekyll-admin
+  rack (>= 3.2.5)
 
 BUNDLED WITH
    2.4.20
