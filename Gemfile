@@ -1,6 +1,7 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'github-pages', group: :jekyll_plugins
 gem 'html-proofer'
 gem 'jekyll-admin'
 gem 'rack', '>=3.2.5'
+gem 'faraday-retry'
