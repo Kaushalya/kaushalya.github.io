@@ -15,6 +15,47 @@
             padding: 20px 10px
             text-decoration: none
 
+        > .item > .theme-toggle
+            appearance: none
+            background: var(--color-bg, #fff)
+            border: 1px solid var(--color-border, #{$epsilon})
+            border-radius: 999px
+            color: var(--color-link, #{$delta})
+            cursor: pointer
+            display: inline-flex
+            align-items: center
+            gap: 6px
+            font: inherit
+            font-weight: 300
+            font-size: 1.4rem
+            line-height: 1
+            margin: 0
+            padding: 8px 10px
+            position: fixed
+            right: 20px
+            top: 20px
+            z-index: 1000
+            transition: background-color .2s ease, border-color .2s ease, color .2s ease
+
+            &:hover,
+            &:focus
+                background: var(--color-surface, #fff)
+                border-color: var(--color-muted, #{$gama})
+                outline: none
+
+            &:focus-visible
+                box-shadow: 0 0 0 3px rgba(75, 0, 130, .25)
+
+        > .item > .theme-toggle > .theme-toggle-icon
+            width: 10px
+            height: 10px
+            border-radius: 50%
+            background: currentColor
+            box-shadow: inset -3px -3px 0 var(--color-bg, #fff)
+
+        > .item > .theme-toggle[aria-pressed="true"] > .theme-toggle-icon
+            box-shadow: 0 0 0 2px currentColor
+
 .nav
     position: absolute
     right: 0
@@ -44,3 +85,12 @@
 
             &:hover
                 color: $alpha
+
+        > .item > .theme-toggle
+            font-size: 1.4rem
+
+@media #{$below}
+    .nav
+        position: static
+        text-align: center
+        margin-top: 20px

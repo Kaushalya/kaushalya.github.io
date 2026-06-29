@@ -1,0 +1,153 @@
+:root {
+  --color-bg: #ffffff;
+  --color-text: #666666;
+  --color-heading: #222222;
+  --color-muted: #aaaaaa;
+  --color-link: #4b0082;
+  --color-border: #ededed;
+  --color-surface: #ffffff;
+  --color-strong: #000000;
+  --color-code-bg: #ffffff;
+  --color-code-border: #ededed;
+  --color-highlight: rgba(39, 243, 106, 0.15);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #111318;
+  --color-text: #c9d1d9;
+  --color-heading: #f0f3f6;
+  --color-muted: #8b949e;
+  --color-link: #c39bff;
+  --color-border: #30363d;
+  --color-surface: #161b22;
+  --color-strong: #ffffff;
+  --color-code-bg: #0d1117;
+  --color-code-border: #30363d;
+  --color-highlight: rgba(82, 183, 136, 0.22);
+  color-scheme: dark;
+}
+
+html {
+  background: var(--color-bg);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color .2s ease, color .2s ease;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-heading);
+}
+
+a {
+  color: var(--color-link);
+}
+
+p,
+ul li,
+ol li {
+  color: var(--color-text);
+}
+
+strong {
+  color: var(--color-strong);
+}
+
+figcaption,
+.header-home > .description,
+.caption,
+.breaker:before,
+.footer-main,
+.footer-main > .extra {
+  color: var(--color-muted);
+}
+
+blockquote {
+  border-left-color: var(--color-border);
+}
+
+hr,
+.home > .list,
+.blog > .list,
+.projects > .list,
+.footer-main {
+  border-color: var(--color-border);
+}
+
+code,
+tt,
+pre {
+  background: var(--color-code-bg);
+  color: var(--color-text);
+}
+
+pre {
+  border-color: var(--color-code-border);
+}
+
+.home > .list:before,
+.blog > .list:before,
+.projects > .list:before,
+.footer-main:before {
+  background: var(--color-bg);
+  border-color: var(--color-border);
+  box-shadow: var(--color-bg) 0 0 0 5px;
+}
+
+.home > .list > .item:hover > .url > .title,
+.blog > .list > .item:hover > .url > .title,
+.projects > .list > .item:hover > .url > .title {
+  color: var(--color-link);
+}
+
+.home > .list .item:hover .url aside,
+.blog > .list .item:hover .url aside,
+.projects > .list .item:hover .url aside {
+  color: var(--color-text);
+}
+
+.home > .list aside,
+.blog > .list aside,
+.projects > .list aside {
+  color: var(--color-muted);
+}
+
+.footer-main > .extra > .link {
+  color: var(--color-heading);
+}
+
+.footer-main > .extra > .link:hover {
+  border-color: var(--color-muted);
+}
+
+.footer-main > .link > .icon {
+  fill: var(--color-muted) !important;
+}
+
+.footer-main > .link > .icon:hover {
+  fill: var(--color-link) !important;
+}
+
+.icon {
+  fill: var(--color-heading);
+  color: var(--color-heading);
+}
+
+.evidence,
+.star > .url > .title {
+  background-image: linear-gradient(var(--color-highlight), var(--color-highlight));
+}
+
+:root[data-theme="dark"] img {
+  opacity: .92;
+}
+
+:root[data-theme="dark"] .header-home > .link > .selfie:hover {
+  box-shadow: 0 0 4px 0 rgba(255,255,255,0.22), 0 0 12px 0 rgba(255,255,255,0.12);
+}

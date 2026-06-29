@@ -19,6 +19,16 @@ layout: compress
     <link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html','' }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}{{ "/feed.xml" }}" />
 
+    <script>
+    (function () {
+        var key = 'kaushalya-theme';
+        var savedTheme = localStorage.getItem(key);
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+    }());
+    </script>
+
     <style>
     {% capture scss_sheet %}{% include style.scss %}{% endcapture %}
     {{ scss_sheet | scssify }}
@@ -43,6 +53,33 @@ layout: compress
     </div>
 
     {% include icons.html %}
+
+    <script>
+    (function () {
+        var key = 'kaushalya-theme';
+        var toggle = document.querySelector('.js-theme-toggle');
+
+        if (!toggle) {
+            return;
+        }
+
+        function applyTheme(theme) {
+            var isDark = theme === 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            toggle.setAttribute('aria-pressed', isDark);
+            toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            toggle.querySelector('.theme-toggle-text').textContent = isDark ? 'Light' : 'Dark';
+        }
+
+        applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
+
+        toggle.addEventListener('click', function () {
+            var nextTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            localStorage.setItem(key, nextTheme);
+            applyTheme(nextTheme);
+        });
+    }());
+    </script>
 
     {% include analytics-google.html %}
 

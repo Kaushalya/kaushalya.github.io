@@ -41,5 +41,12 @@
                 <a class="link" href="{% if site.resume-external %}{{ site.resume-url }}{% else %}{{ site.resume-url | relative_url }}{% endif %}">Résumé</a>
             </li>
         {% endif %}
+
+        <li class="item">
+            <button class="theme-toggle js-theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+                <span class="theme-toggle-icon" aria-hidden="true"></span>
+                <span class="theme-toggle-text">Dark</span>
+            </button>
+        </li>
     </ul>
 </nav>
