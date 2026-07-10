@@ -1,0 +1,50 @@
+---
+layout: compress
+---
+{% assign explainer_marker = '<!-- explainer-body -->' %}
+{% if content contains explainer_marker %}
+    {% assign explainer_parts = content | split: explainer_marker %}
+    {% assign explainer_head = explainer_parts | first %}
+    {% assign explainer_body = explainer_parts | last %}
+{% else %}
+    {% assign explainer_body = content %}
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page.description | default: site.bio | escape }}">
+    <meta name="author" content="{{ site.name }}">
+
+    {% seo %}
+    {% include favicon.html %}
+
+    <link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html','' }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}/feed.xml">
+    <link rel="stylesheet" href="{{ '/assets/css/explainer-shell.css' | relative_url }}">
+    {% if page.explainer_stylesheet %}
+    <link rel="stylesheet" href="{{ page.explainer_stylesheet | relative_url }}">
+    {% endif %}
+
+    {% include theme-init.html %}
+    {{ explainer_head }}
+</head>
+<body class="explainer-shell">
+    <a class="explainer-skip-link" href="#explainer-content">Skip to explainer</a>
+    <div class="explainer-site-nav">
+        {% include nav.html %}
+    </div>
+
+    <div id="explainer-content" class="explainer-content" tabindex="-1">
+        {{ explainer_body }}
+    </div>
+
+    {% if page.explainer_icons %}
+        {% include icons.html %}
+    {% endif %}
+    {% include theme-toggle-script.html %}
+    {% include analytics-google.html %}
+</body>
+</html>

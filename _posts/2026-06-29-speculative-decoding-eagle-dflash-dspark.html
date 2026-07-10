@@ -1,5 +1,5 @@
 ---
-layout: null
+layout: explainer
 title: "Speculative Decoding: EAGLE vs DFlash vs DSpark"
 description: "An interactive explanation of speculative decoding variants, comparing EAGLE, DFlash, and DSpark."
 category: blog
@@ -12,12 +12,6 @@ tags:
 comments: false
 published: true
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Speculative Decoding: EAGLE vs DFlash vs DSpark</title>
   <style>
     :root {
       --bg: #0b1020;
@@ -1385,9 +1379,247 @@ published: true
         transition-duration: .01ms !important;
       }
     }
+
+    /* Light explainer palette, driven by the shared site theme toggle. */
+    :root[data-theme="light"] {
+      --bg: #f1f6f4;
+      --panel: #ffffff;
+      --ink: #12232a;
+      --muted: #60727a;
+      --line: rgba(29, 63, 72, .16);
+      --soft: rgba(37, 74, 82, .07);
+      --accent: #6f5bd5;
+      --accent-2: #087f6c;
+      --good: #087f50;
+      --warn: #a96808;
+      --bad: #c53f58;
+      --shadow: 0 24px 65px rgba(44, 73, 78, .12);
+      color-scheme: light;
+    }
+
+    :root[data-theme="light"] body {
+      background:
+        radial-gradient(circle at 8% 5%, rgba(111, 91, 213, .10), transparent 27rem),
+        radial-gradient(circle at 92% 12%, rgba(8, 127, 108, .09), transparent 25rem),
+        linear-gradient(rgba(23,72,78,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,72,78,.035) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, auto, 48px 48px, 48px 48px, auto;
+    }
+
+    :root[data-theme="light"] body::before {
+      background: linear-gradient(180deg, transparent 55%, rgba(241, 246, 244, .72));
+    }
+
+    :root[data-theme="light"] header::before {
+      border-color: rgba(111, 91, 213, .16);
+      background:
+        radial-gradient(circle at center, rgba(111, 91, 213, .13) 0 2px, transparent 3px),
+        repeating-radial-gradient(circle, transparent 0 47px, rgba(8, 127, 108, .08) 48px 49px);
+    }
+
+    :root[data-theme="light"] header::after { color: rgba(66, 91, 99, .5); }
+    :root[data-theme="light"] .lead { color: #52666e; }
+
+    :root[data-theme="light"] .eyebrow {
+      border-color: rgba(8, 127, 108, .25);
+      background: rgba(8, 127, 108, .07);
+      color: #086c5c;
+    }
+
+    :root[data-theme="light"] .page-nav a {
+      background: rgba(255,255,255,.72);
+      color: #52666e;
+    }
+
+    :root[data-theme="light"] .page-nav a:hover { color: var(--ink); }
+
+    :root[data-theme="light"] .example {
+      border-color: rgba(111,91,213,.2);
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 20px 55px rgba(44,73,78,.12), inset 0 1px rgba(255,255,255,.8);
+      color: var(--ink);
+    }
+
+    :root[data-theme="light"] .example > span:not(.cursor) { color: #73848a; }
+    :root[data-theme="light"] .example strong { background: rgba(28,63,72,.065); color: #1c3138; }
+    :root[data-theme="light"] .example strong:last-of-type { background: rgba(8,127,108,.1); color: #076a5a; }
+    :root[data-theme="light"] .cursor { background: #31515a; }
+
+    :root[data-theme="light"] .card {
+      background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(246,250,249,.97));
+      box-shadow: 0 1px rgba(255,255,255,.9) inset, var(--shadow);
+    }
+
+    :root[data-theme="light"] .spec-box,
+    :root[data-theme="light"] .speed-panel,
+    :root[data-theme="light"] .batch-serving {
+      background: rgba(255,255,255,.64);
+    }
+
+    :root[data-theme="light"] .spec-box:not(:last-child)::after,
+    :root[data-theme="light"] .versus span {
+      background: #f7faf9;
+    }
+
+    :root[data-theme="light"] .spec-kicker,
+    :root[data-theme="light"] .speed-kicker,
+    :root[data-theme="light"] .pass-id,
+    :root[data-theme="light"] .request-id,
+    :root[data-theme="light"] .row-title,
+    :root[data-theme="light"] .draft-strip-label {
+      color: #6d8087;
+    }
+
+    :root[data-theme="light"] .note {
+      border-color: rgba(8,127,108,.16);
+      background: rgba(8,127,108,.055);
+      color: #566a71;
+    }
+
+    :root[data-theme="light"] .dimension-card {
+      background: linear-gradient(145deg, rgba(247,247,255,.98), rgba(250,253,252,.98));
+    }
+
+    :root[data-theme="light"] .dimbox {
+      background: rgba(255,255,255,.7);
+      color: #41575f;
+    }
+
+    :root[data-theme="light"] .method-card::after { color: rgba(29,63,72,.045); }
+
+    :root[data-theme="light"] .tag {
+      background: rgba(29,63,72,.045);
+      color: #51656d;
+    }
+
+    :root[data-theme="light"] .batch-card {
+      background:
+        radial-gradient(circle at 76% 25%, rgba(8,127,108,.07), transparent 24rem),
+        linear-gradient(145deg, rgba(252,255,254,.97), rgba(243,249,247,.98));
+    }
+
+    :root[data-theme="light"] .speed-panel.fast {
+      border-color: rgba(8,127,108,.2);
+      background: linear-gradient(145deg, rgba(8,127,108,.055), rgba(255,255,255,.72));
+    }
+
+    :root[data-theme="light"] .pass-row,
+    :root[data-theme="light"] .speed-metric {
+      background: rgba(255,255,255,.62);
+    }
+
+    :root[data-theme="light"] .pass-context,
+    :root[data-theme="light"] .one-pass,
+    :root[data-theme="light"] .speed-caveat {
+      color: #556a72;
+    }
+
+    :root[data-theme="light"] .draft-strip {
+      border-color: rgba(111,91,213,.22);
+      background: rgba(111,91,213,.04);
+    }
+
+    :root[data-theme="light"] .verify-matrix,
+    :root[data-theme="light"] .request-batch {
+      background: rgba(255,255,255,.68);
+    }
+
+    :root[data-theme="light"] .verify-input,
+    :root[data-theme="light"] .tensor-label { color: #65787f; }
+    :root[data-theme="light"] .verify-predicts,
+    :root[data-theme="light"] .speed-metric strong { color: #20353c; }
+
+    :root[data-theme="light"] .one-pass {
+      border-color: rgba(8,127,108,.18);
+      background: rgba(8,127,108,.055);
+    }
+
+    :root[data-theme="light"] .tensor-box {
+      border-color: rgba(8,127,108,.22);
+      background: linear-gradient(145deg, rgba(8,127,108,.09), rgba(111,91,213,.05));
+    }
+
+    :root[data-theme="light"] .tensor-shape { color: #075f51; }
+
+    :root[data-theme="light"] .speed-caveat {
+      background: rgba(169,104,8,.06);
+    }
+
+    :root[data-theme="light"] .lab-card {
+      background: linear-gradient(150deg, rgba(250,253,252,.98), rgba(241,247,245,.98));
+    }
+
+    :root[data-theme="light"] button,
+    :root[data-theme="light"] .button {
+      background: rgba(255,255,255,.68);
+      color: #334b53;
+    }
+
+    :root[data-theme="light"] button:hover:not(:disabled) {
+      border-color: rgba(111,91,213,.35);
+      background: rgba(111,91,213,.07);
+    }
+
+    :root[data-theme="light"] .tabs button.active {
+      border-color: rgba(8,127,108,.25);
+      background: linear-gradient(90deg, rgba(8,127,108,.10), rgba(111,91,213,.06));
+      color: #183039;
+      box-shadow: inset 2px 0 var(--accent-2), 0 12px 30px rgba(44,73,78,.09);
+    }
+
+    :root[data-theme="light"] .callout {
+      border-color: rgba(111,91,213,.16);
+      background: rgba(111,91,213,.055);
+    }
+
+    :root[data-theme="light"] .pill {
+      background: rgba(255,255,255,.72);
+    }
+
+    :root[data-theme="light"] .progress { background: rgba(29,63,72,.08); }
+
+    :root[data-theme="light"] .viz {
+      background:
+        linear-gradient(rgba(29,63,72,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(29,63,72,.025) 1px, transparent 1px),
+        rgba(255,255,255,.62);
+      background-size: 28px 28px;
+      box-shadow: inset 0 1px rgba(255,255,255,.8);
+    }
+
+    :root[data-theme="light"] .flow {
+      background: rgba(248,251,250,.85);
+    }
+
+    :root[data-theme="light"] .token {
+      border-color: rgba(29,63,72,.18);
+      background: #eef4f2;
+      color: #253d45;
+      box-shadow: 0 6px 16px rgba(44,73,78,.09), inset 0 1px rgba(255,255,255,.75);
+    }
+
+    :root[data-theme="light"] .token.mask { background: rgba(29,63,72,.035); color: #6d8087; }
+    :root[data-theme="light"] .token.feature,
+    :root[data-theme="light"] .token.base { border-color: rgba(111,91,213,.28); background: rgba(111,91,213,.08); color: #5745b5; }
+    :root[data-theme="light"] .token.seq { border-color: rgba(8,127,108,.27); background: rgba(8,127,108,.075); color: #086956; }
+    :root[data-theme="light"] .token.accepted { border-color: rgba(8,127,80,.28); background: rgba(8,127,80,.08); color: #087448; }
+    :root[data-theme="light"] .token.rejected { border-color: rgba(197,63,88,.3); background: rgba(197,63,88,.075); color: #b0324b; }
+    :root[data-theme="light"] .token.dropped { border-color: rgba(29,63,72,.1); background: rgba(29,63,72,.04); color: #75868c; }
+    :root[data-theme="light"] .token.corrected { border-color: rgba(169,104,8,.28); background: rgba(169,104,8,.08); color: #925a07; }
+
+    :root[data-theme="light"] .mini-table th { background: rgba(235,242,240,.9); color: #61747b; }
+    :root[data-theme="light"] .compare td:first-child { color: #20353c; }
+
+    :root[data-theme="light"] pre {
+      background: rgba(255,255,255,.72);
+      color: #40565e;
+    }
+
+    :root[data-theme="light"] code { background: rgba(111,91,213,.08); color: #5948ac; }
+    :root[data-theme="light"] .math { color: #20353c; }
   </style>
-</head>
-<body>
+<!-- explainer-body -->
   <header>
     <div class="eyebrow">Interactive explainer · draft inputs, hidden features, and dimensions</div>
     <h1>Speculative Decoding:<br><span class="title-method">EAGLE <span class="title-vs">vs</span></span> <span class="title-method">DFlash <span class="title-vs">vs</span></span> <span class="title-method">DSpark</span></h1>
@@ -2372,5 +2604,3 @@ confidence:
 
     render();
   </script>
-</body>
-</html>

@@ -1,0 +1,9 @@
+<script>
+(function () {
+    var key = 'kaushalya-theme';
+    var savedTheme = localStorage.getItem(key);
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+}());
+</script>
